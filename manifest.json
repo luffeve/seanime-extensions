@@ -1,0 +1,32 @@
+{
+  "id": "mangaball",
+  "name": "MangaBall",
+  "description": "MangaBall (mangaball.net) manga provider. Supports many languages and scanlator/group tagging.",
+  "manifestURI": "",
+  "version": "1.0.0",
+  "author": "your-name-here",
+  "icon": "",
+  "website": "https://mangaball.net",
+  "type": "manga-provider",
+  "language": "typescript",
+  "lang": "multi",
+  "payloadURI": "./provider.ts",
+  "userConfig": {
+    "requiresConfig": false,
+    "version": 1,
+    "fields": [
+      {
+        "name": "show18plus",
+        "label": "Show NSFW content",
+        "type": "switch",
+        "default": "true"
+      },
+      {
+        "name": "headless",
+        "label": "Run Chrome headless",
+        "type": "switch",
+        "default": "true"
+      }
+    ]
+  }
+}
