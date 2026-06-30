@@ -2,7 +2,7 @@
   "id": "mangaball",
   "name": "MangaBall",
   "description": "MangaBall (mangaball.net) manga provider. Supports many languages and scanlator/group tagging.",
-  "manifestURI": "",
+  "manifestURI": "https://raw.githubusercontent.com/luffeve/seanime-extensions/main/manifest.json",
   "version": "1.0.0",
   "author": "your-name-here",
   "icon": "",
@@ -10,7 +10,7 @@
   "type": "manga-provider",
   "language": "typescript",
   "lang": "multi",
-  "payloadURI": "./provider.ts",
+  "payloadURI": "https://raw.githubusercontent.com/luffeve/seanime-extensions/main/provider.ts",
   "userConfig": {
     "requiresConfig": false,
     "version": 1,
