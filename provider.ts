@@ -181,19 +181,27 @@ class Provider {
         }
 
         try {
-            const quick = await this.searchSmart(query)
-            if (quick.length > 0) {
-                return quick
+            try {
+                const quick = await this.searchSmart(query)
+                if (quick.length > 0) {
+                    return quick
+                }
+            } catch (e) {
+                console.error("MangaBall: smart-search failed", e)
             }
-        } catch (e) {
-            console.error("MangaBall: smart-search failed", e)
-        }
 
-        try {
-            return await this.searchAdvanced(query)
-        } catch (e) {
-            console.error("MangaBall: advanced search failed", e)
-            return []
+            try {
+                return await this.searchAdvanced(query)
+            } catch (e) {
+                console.error("MangaBall: advanced search failed", e)
+                return []
+            }
+        } finally {
+            // Seanime's Go code discards the ChromeDP instance reference on
+            // VM bind (goja.go:77), so Chrome processes are never cleaned up
+            // by the framework on reload/shutdown. The only fix is to close
+            // from JS ourselves before each public method returns.
+            try { await resetBrowser() } catch (_) {}
         }
     }
 
@@ -254,6 +262,11 @@ class Provider {
     // ---------------------------------------------------------------------
 
     async findChapters(mangaId: string): Promise<ChapterDetails[]> {
+        try { return await this._findChapters(mangaId) }
+        finally { try { await resetBrowser() } catch (_) {} }
+    }
+
+    private async _findChapters(mangaId: string): Promise<ChapterDetails[]> {
         try {
             const titleId = this.titleIdFromSlug(mangaId)
 
@@ -327,6 +340,11 @@ class Provider {
     // ---------------------------------------------------------------------
 
     async findChapterPages(chapterId: string): Promise<ChapterPage[]> {
+        try { return await this._findChapterPages(chapterId) }
+        finally { try { await resetBrowser() } catch (_) {} }
+    }
+
+    private async _findChapterPages(chapterId: string): Promise<ChapterPage[]> {
         try {
             const url = `${API}/chapter-detail/${chapterId}/`
             let html: string | null = null

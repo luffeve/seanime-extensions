@@ -3,7 +3,7 @@
   "name": "MangaBall",
   "description": "MangaBall (mangaball.net) manga provider. Supports many languages and scanlator/group tagging.",
   "manifestURI": "https://raw.githubusercontent.com/luffeve/seanime-extensions/main/manifest.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "your-name-here",
   "icon": "",
   "website": "https://mangaball.net",
